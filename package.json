@@ -1,0 +1,23 @@
+{
+  "name": "justthejuice",
+  "version": "1.0.0",
+  "description": "Non-alcoholic beverage recipes",
+  "main": "justthejuice.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/be-hurt/justthejuice.git"
+  },
+  "author": "Brittany Hurt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/be-hurt/justthejuice/issues"
+  },
+  "homepage": "https://github.com/be-hurt/justthejuice#readme",
+  "dependencies": {
+    "express": "^4.15.2",
+    "express-handlebars": "^3.0.0"
+  }
+}
