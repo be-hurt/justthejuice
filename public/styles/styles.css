@@ -1,0 +1,37 @@
+body {
+    background-color: #c6e3ab;
+}
+.navbar {
+    background-color: #8ac158;
+    height: 90px;
+    padding: 5px, 5px, 10px, 5px;
+    margin: 0px;
+}
+.navbar-brand {
+    padding-top: 6px;
+}
+li {
+    padding: 20px;
+    font-size: 1.5em;
+}
+#myNavbar {
+    background-color: #8ac158;
+    border-style: none;
+}
+#myNavbar li a {
+    color: white;
+}
+#myNavbar li a:hover {
+    color: #9f5d9f;
+    background-color: #8ac158;
+    text-decoration: underline;
+}
+.dropdown-menu {
+    background-color: #8ac158;
+}
+.navbar-form {
+    padding: 20px;
+}
+.container {
+    background-color: white;
+}
