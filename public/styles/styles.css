@@ -3,14 +3,13 @@ body {
 }
 .navbar {
     background-color: #8ac158;
-    height: 90px;
     padding: 5px, 5px, 10px, 5px;
     margin: 0px;
 }
 .navbar-brand {
     padding-top: 6px;
 }
-li {
+.nav li {
     padding: 20px;
     font-size: 1.5em;
 }
@@ -36,6 +35,22 @@ li {
     background-color: white;
     padding: 2.5%;
 }
-#carousel-example-generic {
-    max-width: 550px;
+.carousel-wrapper {
+    width: 84%; /* for example */
+    margin: auto;
+    margin-bottom: 4%;
+    background-color: #8ac158;
+}
+.carousel-indicators > li {
+    padding: 10px;
+    border-radius: 50%;
+}
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+    display: inline-block;
+    margin: auto;
+}
+.carousel-caption {
+    text-align: right;
+    bottom: 25%;
 }
