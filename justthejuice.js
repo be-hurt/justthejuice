@@ -1,12 +1,11 @@
 var express = require('express');
-
 var app = express();
-
-var credentials = require('./credentials.js');
 
 //mongodb setup
 var mongoose = require('mongoose');
-var Recipes = require('./models/recipes.js');
+var credentials = require('./credentials.js');
+var Recipe = require('./models/recipes.js');
+require('./lib/recipesData.js')
 
 var opts = {
     server: {
@@ -22,7 +21,7 @@ switch(app.get('env')){
         break;
     default:
         throw new Error('Unknown execution environment: ' + app.get('env'));
-}
+};
 
 //my scripts
 
@@ -57,9 +56,9 @@ app.get('/my-account', function (req, res) {
 });
 
 app.get('/all-recipes', function (req, res) {
-    Recipes.find(function (err, recipes){
+    Recipe.find({available: true}, function (err, Recipe){
         var context = {
-            recipes: recipes.map(function(recipe){
+            recipes: Recipe.map(function(recipe){
                 return {
                     recipe_name: recipe.recipe_name,
                     user: recipe.user,
@@ -73,8 +72,8 @@ app.get('/all-recipes', function (req, res) {
                 }
             })
         };
+        res.render('all-recipes');
     });
-    res.render('all-recipes');
 });
 
 //404 catch all handler (middleware)

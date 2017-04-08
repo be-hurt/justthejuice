@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var recipesSchema = mongoose.Schema({
+var recipeSchema = mongoose.Schema({
     recipe_name: {type: String, required: true},
     user: String,
     category: {type: String, required: true},
@@ -12,24 +12,23 @@ var recipesSchema = mongoose.Schema({
     image: String
 });
 
-recipesSchema.methods.sort_ingredients = function () {
+recipeSchema.methods.sort_ingredients = function () {
     for (var i=0, len = this.ingredients.length; i < len; i++) {
-        $('#ingredients_list').append('<li>'i'</li>');
+        $('#ingredients_list').append('<li>' + i + '</li>');
     }
 };
 
-recipesSchema.methods.sort_steps = function () {
+recipeSchema.methods.sort_steps = function () {
     for (var i=0, len = this.steps.length; i < len; i++) {
-        $('#steps_list').append('<li>'i'</li>');
+        $('#steps_list').append('<li>'+ i + '</li>');
     }
 };
 
-recipesSchema.methods.sort_notes = function () {
+recipeSchema.methods.sort_notes = function () {
     for (var i=0, len = this.notes.length; i < len; i++) {
-        $('#notes_list').append('<li>'i'</li>');
+        $('#notes_list').append('<li>'+ i +'</li>');
     }
 };
 
-
-var Recipes = mongoose.model('Recipes', recipesSchema);
-module.exports = Recipes;
+var Recipe = mongoose.model('Recipe', recipeSchema);
+module.exports = Recipe;

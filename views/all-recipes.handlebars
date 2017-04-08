@@ -1,7 +1,5 @@
-<p>Recipes will go here...Once the database is working.</p>
-
 <h1>Recipes: </h1>
-{{#each recipes}}
+{{#each recipe}}
     <div class="recipe">
         <h3>{{recipe_name}}</h3>
         <p>Category: {{category}}</p>
@@ -10,15 +8,15 @@
         <p>Submitted by: {{user}}</p>
         <p>Ingredients: </p>
         <ul id="ingredients_list">
-            {{ingredients}}
+            {{{ingredients}}}
         </ul>
         <p>Instructions: </p>
         <ul id= "steps_list">
-            {{steps}}
+            {{{steps}}}
         </ul>
         <p>Notes: </p>
         <ul id = "notes_list">
-            {{notes}}
+            {{{notes}}}
         </ul>
     </div>
 {{/each}}
