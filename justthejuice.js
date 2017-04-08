@@ -2,9 +2,41 @@ var express = require('express');
 
 var app = express();
 
+var credentials = require('./credentials.js');
+
+//mongodb setup
+var mongoose = require('mongoose');
+var Recipes = require('./models/recipes.js');
+
+var opts = {
+    server: {
+        socketOptions: {keepAlive: 1}
+    }
+};
+switch(app.get('env')){
+    case 'development':
+        mongoose.connect(credentials.mongo.development.connectionString, opts);
+        break;
+    case 'production':
+        mongoose.connect(credentials.mongo.production.connectionString, opts);
+        break;
+    default:
+        throw new Error('Unknown execution environment: ' + app.get('env'));
+}
+
+//my scripts
+
 //set up handlesbars view engine
 var handlesbars = require('express-handlebars')
-    .create({defaultLayout: 'main'});
+    .create({defaultLayout: 'main',
+            helpers: {
+                section: function(name, options){
+                    if(!this._sections) this._sections = {};
+                    this._sections[name] = options.fn(this);
+                    return null;
+                }
+            }
+    });
 app.engine('handlebars', handlesbars.engine);
 app.set('view engine', 'handlebars');
 
@@ -18,6 +50,14 @@ app.get('/', function (req, res) {
 
 app.get('/about', function (req, res) {
     res.render('about');
+});
+
+app.get('/my-account', function (req, res) {
+    res.render('my-account');
+});
+
+app.get('/all-recipes', function (req, res) {
+    res.render('all-recipes');
 });
 
 //404 catch all handler (middleware)
