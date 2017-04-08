@@ -57,6 +57,23 @@ app.get('/my-account', function (req, res) {
 });
 
 app.get('/all-recipes', function (req, res) {
+    Recipes.find(function (err, recipes){
+        var context = {
+            recipes: recipes.map(function(recipe){
+                return {
+                    recipe_name: recipe.recipe_name,
+                    user: recipe.user,
+                    category: recipe.category,
+                    rating: recipe.rating,
+                    description: recipe.description,
+                    ingredients: recipe.sort_ingredients(),
+                    steps: recipe.sort_steps(),
+                    notes: recipe.sort_notes(),
+                    image: recipe.image
+                }
+            })
+        };
+    });
     res.render('all-recipes');
 });
 
