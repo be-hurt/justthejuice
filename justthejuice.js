@@ -1,18 +1,51 @@
 var express = require('express');
 var app = express();
 
+app.set('port', process.env.PORT || 3000);
+app.set('ip', process.env.IP || 'localhost');
+app.disable('x-powered-by');
+
 //mongodb setup
 var mongoose = require('mongoose');
+
 var credentials = require('./credentials.js');
 var Recipe = require('./models/recipes.js');
-require('./lib/recipesData.js')
 
+require('./lib/recipesData.js');
+
+//my scripts
+
+//set up handlesbars view engine
+var handlesbars = require('express-handlebars')
+    .create({defaultLayout: 'main',
+        helpers: {
+            section: function (name, options) {
+                if (!this._sections) this._sections = {};
+                this._sections[name] = options.fn(this);
+                return null;
+            }
+        }
+        });
+app.engine('handlebars', handlesbars.engine);
+app.set('view engine', 'handlebars');
+
+
+//Startup
+app.use(express.static(__dirname + '/public'));
+
+app.use(function (req, res, next) {
+    res.locals.showTests = app.get('env') !== 'production' &&
+        req.query.test === '1';
+    next();
+});
+
+//MongoDB setup
 var opts = {
     server: {
         socketOptions: {keepAlive: 1}
     }
 };
-switch(app.get('env')){
+switch (app.get('env')) {
     case 'development':
         mongoose.connect(credentials.mongo.development.connectionString, opts);
         break;
@@ -23,28 +56,27 @@ switch(app.get('env')){
         throw new Error('Unknown execution environment: ' + app.get('env'));
 };
 
-//my scripts
 
-//set up handlesbars view engine
-var handlesbars = require('express-handlebars')
-    .create({defaultLayout: 'main',
-            helpers: {
-                section: function(name, options){
-                    if(!this._sections) this._sections = {};
-                    this._sections[name] = options.fn(this);
-                    return null;
-                }
-            }
-    });
-app.engine('handlebars', handlesbars.engine);
-app.set('view engine', 'handlebars');
-
-app.set('port', process.env.PORT || 3000);
-
-app.use(express.static(__dirname + '/public'));
-
+//Routes
 app.get('/', function (req, res) {
-    res.render('home');
+    Recipe.find(function (err, recipes) {
+        var context = {
+            recipes: recipes.map (function (Recipe) {
+                return {
+                    recipe_name: Recipe.recipe_name,
+                    user: Recipe.user,
+                    category: Recipe.category,
+                    rating: Recipe.rating,
+                    description: Recipe.description,
+                    ingredients: Recipe.ingredients,
+                    steps: Recipe.steps,
+                    notes: Recipe.notes,
+                    image: Recipe.image
+                };
+            })
+        };
+    res.render('home', context);
+    });
 });
 
 app.get('/about', function (req, res) {
@@ -55,39 +87,39 @@ app.get('/my-account', function (req, res) {
     res.render('my-account');
 });
 
-app.get('/all-recipes', function (req, res) {
-    Recipe.find({available: true}, function (err, Recipe){
+app.get('/recipes', function (req, res) {
+    Recipe.find(function (err, recipes) {
         var context = {
-            recipes: Recipe.map(function(recipe){
+            recipes: recipes.map (function (Recipe) {
                 return {
-                    recipe_name: recipe.recipe_name,
-                    user: recipe.user,
-                    category: recipe.category,
-                    rating: recipe.rating,
-                    description: recipe.description,
-                    ingredients: recipe.sort_ingredients(),
-                    steps: recipe.sort_steps(),
-                    notes: recipe.sort_notes(),
-                    image: recipe.image
-                }
+                    recipe_name: Recipe.recipe_name,
+                    user: Recipe.user,
+                    category: Recipe.category,
+                    rating: Recipe.rating,
+                    description: Recipe.description,
+                    ingredients: Recipe.ingredients,
+                    steps: Recipe.steps,
+                    notes: Recipe.notes,
+                    image: Recipe.image
+                };
             })
         };
-        res.render('all-recipes');
+        res.render('recipes', context);
     });
 });
 
 //404 catch all handler (middleware)
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.status(404);
     res.render('404');
 });
 
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
+app.use(function (err, req, res, next) {
+    console.error(err.stack);
     res.status(500);
     res.render('500');
 });
 
-app.listen(app.get('port'), function(){
-    console.log( 'Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.' );
+app.listen(app.get('port'), app.get('ip'), function () {
+    console.log('Express started on http://' + app.get('ip') + ':' + app.get('port') + '; press Ctrl-C to terminate.');
 });

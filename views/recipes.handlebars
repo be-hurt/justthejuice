@@ -1,0 +1,32 @@
+<h1>Recipes: </h1>
+{{#each recipes}}
+    <div class="recipe">
+        <h2>{{recipe_name}}</h2>
+        <p>Uploaded by: {{user}}</p>
+        <p>Category: {{category}}</p>
+        <p>Rating: {{rating}}/5</p>
+        <p>Description: </p>
+        <p>{{description}}</p>
+        <h3>Ingredients: </h3>
+        <ul id="ingredients_list">
+            {{#each ingredients}}
+                <li>{{this}}</li>
+            {{/each}}
+        </ul>
+        <h3>Instructions: </h3>
+        <ol>
+            {{#each steps}}
+                <li>{{this}}</li>
+            {{/each}}
+        </ol>
+        {{#if notes}}
+            <p>Notes: </p>
+            <ul>
+                {{#each notes}}
+                    <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        {{/if}}
+        <button type="button" class="btn">Add to Favourites</button>
+    </div>
+{{/each}}
