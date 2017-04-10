@@ -1,0 +1,122 @@
+<div class="formContainer">
+    <form class="form-horizontal" role="form" action="/new-recipe" method="POST">
+        <input type= "hidden" name="recipe_id" value="{{recipe_id}}">
+        <h3>Submit a new recipe: </h3>
+        <div class="form-group">
+            <label for="fieldRecipe" class="col-sm-2 control-label">Recipe name: </label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" required id="fieldRecipe" name="recipe_name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fieldName" class="col-sm-2 control-label">Username: </label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" required id="fieldName" name="user">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fieldCategory" class="col-sm-2 control-label">Category: </label>
+            <div class="col-sm-4">
+                <select class="form-control" id="category" name="category">
+                    <option>Coffee</option>
+                    <option>Hot Chocolate</option>
+                    <option>Mocktails</option>
+                    <option>Punch</option>
+                    <option>Smoothies</option>
+                    <option>Tea</option>
+                    <option>Other</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fieldDescription" class="col-sm-2 control-label">Description: </label>
+            <div class="col-sm-4">
+                <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fieldIngredients" class="col-sm-2 control-label">Ingredients: </label>
+            <div class="col-sm-4">
+                <ul id="ingredients_list">
+                </ul>
+                <input type="text" class="form-control" required id="fieldIngredients" name="ingredients">
+                {{#section 'jquery'}}
+                    <script>
+                        var ingreds_array = [];
+
+                        function new_ingredient() {
+                            var myText = document.getElementById('fieldIngredients').value;
+                            ingreds_array.push(myText);
+
+                            var new_ingredient = ingreds_array[ingreds_array.length-1];
+                            $('#ingredients_list').append('<li>' + new_ingredient + '</li>');
+
+                            document.getElementById('fieldIngredients').value = "";
+                        };
+                    </script>
+                {{/section}}
+                <br>
+                <button id="add_ingredient" type="button" class="btn btn-default" onclick="new_ingredient()">Add an Ingredient</button>
+            </div>
+         </div>
+
+         <div class="form-group">
+            <label for="fieldSteps" class="col-sm-2 control-label">Steps: </label>
+            <div class="col-sm-4">
+                <ol id="steps_list">
+                </ol>
+                <input type="text" class="form-control" required id="fieldSteps" name="steps">
+                {{#section 'jquery'}}
+                    <script>
+                        var steps_array = [];
+
+                        function new_step() {
+                            var myText = document.getElementById('fieldSteps').value;
+                            steps_array.push(myText);
+
+                            var new_step = steps_array[steps_array.length-1];
+                            $('#steps_list').append('<li>' + new_step + '</li>');
+
+                            document.getElementById('fieldSteps').value = "";
+                        };
+                    </script>
+                {{/section}}
+                <br>
+                <button id="add_step" type="button" class="btn btn-default" onclick="new_step">Add a Step</button>
+             </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="fieldNotes" class="col-sm-2 control-label">Notes: </label>
+            <div class="col-sm-4">
+                <ul id="notes_list">
+                </ul>
+                <input type="text" class="form-control" id="fieldNotes" name="notes">
+                {{#section 'jquery'}}
+                    <script>
+                        var notes_array = [];
+
+                        function new_note() {
+                            var myText = document.getElementById('fieldNotes').value;
+                            notes_array.push(myText);
+
+                            var new_note = notes_array[notes_array.length-1];
+                            $('#notes_list').append('<li>' + new_note + '</li>');
+
+                            document.getElementById('fieldNotes').value = "";
+                        };
+                    </script>
+                {{/section}}
+                <br>
+                <button id="add_note" type="button" class="btn btn-default" onclick="new_note()">Add a Note</button>
+             </div>
+        </div>
+        <!--upload image field here-->
+        <div class="form-group">
+            <div class="">
+            <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
