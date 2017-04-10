@@ -15,6 +15,7 @@ require('./lib/recipesData.js');
 
 //my scripts
 
+
 //set up handlesbars view engine
 var handlesbars = require('express-handlebars')
     .create({defaultLayout: 'main',
@@ -75,7 +76,14 @@ app.get('/', function (req, res) {
                 };
             })
         };
-    res.render('home', context);
+        //function that returns a random recipe;
+        function get_random () {
+            var idx = Math.floor(Math.random() * context.recipes.length);
+            return context.recipes[idx];
+        }
+        var random_recipe = get_random();
+        res.render('home', random_recipe);
+        console.log('HERE', random_recipe);
     });
 });
 

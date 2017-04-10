@@ -45,4 +45,35 @@
     </div>
 </div>
 
-<p>Morbi mauris ligula, vestibulum nec erat ac, condimentum auctor turpis. Ut blandit tristique eros. In orci felis, convallis in arcu ut, ornare euismod augue. Nunc iaculis tellus sit amet lorem fermentum, quis mollis sem ornare. Integer mollis efficitur velit, quis commodo tellus finibus ut. Phasellus ac consectetur elit, at placerat purus. Sed semper molestie neque non porttitor. Sed hendrerit nisi nulla, vitae rutrum urna varius in. In commodo fermentum augue, luctus sagittis dui eleifend feugiat. In nec diam sed nibh convallis pellentesque vitae sit amet sapien. Aenean eget eros vulputate, eleifend ligula vel, ultricies diam. Phasellus sit amet posuere lorem. Praesent ornare interdum ante ut laoreet. Sed venenatis, nunc quis volutpat gravida, eros tellus blandit est, fermentum elementum velit augue ultrices orci.</p>
+<h2>Recipe of the Day: </h2>
+
+<div class="recipe">
+    <h2>{{recipe_name}}</h2>
+    <p>Uploaded by: {{user}}</p>
+    <p>Category: {{category}}</p>
+    <p>Rating: {{rating}}/5</p>
+    <p>Description: </p>
+    <p>{{description}}</p>
+    <h3>Ingredients: </h3>
+    <ul id="ingredients_list">
+        {{#each ingredients}}
+            <li>{{this}}</li>
+        {{/each}}
+    </ul>
+    <h3>Instructions: </h3>
+    <ol>
+        {{#each steps}}
+            <li>{{this}}</li>
+        {{/each}}
+    </ol>
+    {{#if notes}}
+        <p>Notes: </p>
+        <ul>
+            {{#each notes}}
+                <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    {{/if}}
+    <button type="button" class="btn">Add to Favourites</button>
+</div>
+
