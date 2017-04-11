@@ -2,7 +2,7 @@ body {
     background-color: #c6e3ab;
 }
 .navbar {
-    background-color: #8ac158;
+    background-color: #6fb035;
     padding: 5px, 5px, 10px, 5px;
     margin: 0px;
     border-style: none;
@@ -18,7 +18,7 @@ body {
     font-size: 1.5em;
 }
 #myNavbar {
-    background-color: #8ac158;
+    background-color: #6fb035;
     border-style: none;
 }
 #myNavbar li a {
@@ -26,7 +26,7 @@ body {
 }
 #myNavbar li a:hover {
     color: #9f5d9f;
-    background-color: #8ac158;
+    background-color: #6fb035;
     text-decoration: underline;
 }
 .dropdown-menu {
@@ -92,4 +92,9 @@ body {
     border-width: 1px;
     padding: 2em;
     margin: 3em;
+}
+.not_found {
+    text-align: center;
+    padding: 3em;
+    border: dashed 1px black;
 }

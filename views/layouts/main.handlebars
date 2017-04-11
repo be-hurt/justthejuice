@@ -24,12 +24,6 @@
                         <img class="img-responsive logo" alt="logo" src="/img/logo.png">
                     </a>
                 </div>
-                {{#if flash}}
-                    <div class="alert alert-dismissible alert-{{flash.type}}">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <strong>{{flash.intro}}</strong> {{{flash.message}}}
-                    </div>
-                {{/if}}
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <li role="presentation" class="dropdown">
@@ -63,6 +57,12 @@
                 </div>
             </div>
         </nav>
+        {{#if flash}}
+            <div class="alert alert-dismissible alert-{{flash.type}}">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>{{flash.intro}}</strong> {{{flash.message}}}
+            </div>
+        {{/if}}
         <div class="container">
             {{{body}}}
         </div>

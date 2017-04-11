@@ -1,43 +1,58 @@
 {{#section 'jquery'}}
     <script>
-        var ingreds_array = [];
+//        var ingreds_array = [];
+//
+//        function new_ingredient() {
+//            var myText = document.getElementById('fieldIngredients').value;
+//            ingreds_array.push(myText);
+//
+//            var new_ingredient = ingreds_array[ingreds_array.length-1];
+//            $('#ingredients_list').append('<li>' + new_ingredient + '</li>');
+//
+//            document.getElementById('fieldIngredients').value = "";
+//
+//        };
+//
+//        var steps_array = [];
+//
+//        function new_step() {
+//                var myText = document.getElementById('fieldSteps').value;
+//                steps_array.push(myText);
+//
+//                var new_step = steps_array[steps_array.length-1];
+//                $('#steps_list').append('<li>' + new_step + '</li>');
+//
+//                document.getElementById('fieldSteps').value = "";
+//
+//        };
+//
+//        var notes_array = [];
+//
+//        function new_note() {
+//            var myText = document.getElementById('fieldNotes').value;
+//            notes_array.push(myText);
+//
+//            var new_note = notes_array[notes_array.length-1];
+//            $('#notes_list').append('<li>' + new_note + '</li>');
+//
+//            document.getElementById('fieldNotes').value = "";
+//
+//        };
+        var new_ingredient_field = function new_ingredient_field() {
+            var fields = document.getElementById('ingredient_fields');
+            fields.innerHTML = fields.innerHTML + '<input type="text" class="form-control" id="fieldIngredients" name="ingredients[]">';
+        }
 
-        function new_ingredient() {
-            var myText = document.getElementById('fieldIngredients').value;
-            ingreds_array.push(myText);
+        var new_step_field = function new_step_field() {
+            var fields = document.getElementById('step_fields');
+            fields.innerHTML = fields.innerHTML + '<input type="text" class="form-control" id="fieldSteps" name="steps[]">';
+        }
 
-            var new_ingredient = ingreds_array[ingreds_array.length-1];
-            $('#ingredients_list').append('<li>' + new_ingredient + '</li>');
+        var new_note_field = function new_note_field() {
+            var fields = document.getElementById('note_fields');
+            fields.innerHTML = fields.innerHTML + '<input type="text" class="form-control" id="fieldNotes" name="notes[]">';
+        }
 
-            document.getElementById('fieldIngredients').value = "";
-
-        };
-
-        var steps_array = [];
-
-        function new_step() {
-                var myText = document.getElementById('fieldSteps').value;
-                steps_array.push(myText);
-
-                var new_step = steps_array[steps_array.length-1];
-                $('#steps_list').append('<li>' + new_step + '</li>');
-
-                document.getElementById('fieldSteps').value = "";
-
-        };
-
-        var notes_array = [];
-
-        function new_note() {
-            var myText = document.getElementById('fieldNotes').value;
-            notes_array.push(myText);
-
-            var new_note = notes_array[notes_array.length-1];
-            $('#notes_list').append('<li>' + new_note + '</li>');
-
-            document.getElementById('fieldNotes').value = "";
-
-        };
     </script>
 {{/section}}
 
@@ -82,9 +97,11 @@
             <div class="col-sm-4">
                 <ul id="ingredients_list">
                 </ul>
-                <input type="text" class="form-control" required id="fieldIngredients" name="ingredients[]">
+                <div id="ingredient_fields">
+                    <input type="text" class="form-control" required id="fieldIngredients" name="ingredients[]">
+                </div>
                 <br>
-                <button id="add_ingredient" type="button" class="btn btn-default" onclick="new_ingredient()">Add an Ingredient</button>
+                <button id="add_ingredient" type="button" class="btn btn-default" onclick="new_ingredient_field()">Add an Ingredient</button>
             </div>
          </div>
 
@@ -93,13 +110,13 @@
             <div class="col-sm-4">
                 <ol id="steps_list">
                 </ol>
-                <input type="text" class="form-control" required id="fieldSteps" name="steps[]">
+                <div id="step_fields">
+                    <input type="text" class="form-control" required id="fieldSteps" name="steps[]">
+                </div>
                 <br>
-                <button id="add_step" type="button" class="btn btn-default" onclick="new_step()">Add a Step</button>
+                <button id="add_step" type="button" class="btn btn-default" onclick="new_step_field()">Add a Step</button>
              </div>
         </div>
-
-
         <div class="form-group">
             <label for="fieldNotes" class="col-sm-2 control-label">Notes: </label>
             <div class="col-sm-4">
@@ -109,7 +126,7 @@
                     <input type="text" class="form-control" id="fieldNotes" name="notes[]">
                 </div>
                 <br>
-                <button id="add_note" type="button" class="btn btn-default" onclick="new_note()">Add a Note</button>
+                <button id="add_note" type="button" class="btn btn-default" onclick="new_note_field()">Add a Note</button>
              </div>
         </div>
         <!--upload image field here-->
