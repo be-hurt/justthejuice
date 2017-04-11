@@ -1,3 +1,46 @@
+{{#section 'jquery'}}
+    <script>
+        var ingreds_array = [];
+
+        function new_ingredient() {
+            var myText = document.getElementById('fieldIngredients').value;
+            ingreds_array.push(myText);
+
+            var new_ingredient = ingreds_array[ingreds_array.length-1];
+            $('#ingredients_list').append('<li>' + new_ingredient + '</li>');
+
+            document.getElementById('fieldIngredients').value = "";
+
+        };
+
+        var steps_array = [];
+
+        function new_step() {
+                var myText = document.getElementById('fieldSteps').value;
+                steps_array.push(myText);
+
+                var new_step = steps_array[steps_array.length-1];
+                $('#steps_list').append('<li>' + new_step + '</li>');
+
+                document.getElementById('fieldSteps').value = "";
+
+        };
+
+        var notes_array = [];
+
+        function new_note() {
+            var myText = document.getElementById('fieldNotes').value;
+            notes_array.push(myText);
+
+            var new_note = notes_array[notes_array.length-1];
+            $('#notes_list').append('<li>' + new_note + '</li>');
+
+            document.getElementById('fieldNotes').value = "";
+
+        };
+    </script>
+{{/section}}
+
 <div class="formContainer">
     <form class="form-horizontal" role="form" action="/new-recipe" method="POST">
         <input type= "hidden" name="recipe_id" value="{{recipe_id}}">
@@ -39,22 +82,7 @@
             <div class="col-sm-4">
                 <ul id="ingredients_list">
                 </ul>
-                <input type="text" class="form-control" required id="fieldIngredients" name="ingredients">
-                {{#section 'jquery'}}
-                    <script>
-                        var ingreds_array = [];
-
-                        function new_ingredient() {
-                            var myText = document.getElementById('fieldIngredients').value;
-                            ingreds_array.push(myText);
-
-                            var new_ingredient = ingreds_array[ingreds_array.length-1];
-                            $('#ingredients_list').append('<li>' + new_ingredient + '</li>');
-
-                            document.getElementById('fieldIngredients').value = "";
-                        };
-                    </script>
-                {{/section}}
+                <input type="text" class="form-control" required id="fieldIngredients" name="ingredients[]">
                 <br>
                 <button id="add_ingredient" type="button" class="btn btn-default" onclick="new_ingredient()">Add an Ingredient</button>
             </div>
@@ -65,24 +93,9 @@
             <div class="col-sm-4">
                 <ol id="steps_list">
                 </ol>
-                <input type="text" class="form-control" required id="fieldSteps" name="steps">
-                {{#section 'jquery'}}
-                    <script>
-                        var steps_array = [];
-
-                        function new_step() {
-                            var myText = document.getElementById('fieldSteps').value;
-                            steps_array.push(myText);
-
-                            var new_step = steps_array[steps_array.length-1];
-                            $('#steps_list').append('<li>' + new_step + '</li>');
-
-                            document.getElementById('fieldSteps').value = "";
-                        };
-                    </script>
-                {{/section}}
+                <input type="text" class="form-control" required id="fieldSteps" name="steps[]">
                 <br>
-                <button id="add_step" type="button" class="btn btn-default" onclick="new_step">Add a Step</button>
+                <button id="add_step" type="button" class="btn btn-default" onclick="new_step()">Add a Step</button>
              </div>
         </div>
 
@@ -92,22 +105,9 @@
             <div class="col-sm-4">
                 <ul id="notes_list">
                 </ul>
-                <input type="text" class="form-control" id="fieldNotes" name="notes">
-                {{#section 'jquery'}}
-                    <script>
-                        var notes_array = [];
-
-                        function new_note() {
-                            var myText = document.getElementById('fieldNotes').value;
-                            notes_array.push(myText);
-
-                            var new_note = notes_array[notes_array.length-1];
-                            $('#notes_list').append('<li>' + new_note + '</li>');
-
-                            document.getElementById('fieldNotes').value = "";
-                        };
-                    </script>
-                {{/section}}
+                <div id="note_fields">
+                    <input type="text" class="form-control" id="fieldNotes" name="notes[]">
+                </div>
                 <br>
                 <button id="add_note" type="button" class="btn btn-default" onclick="new_note()">Add a Note</button>
              </div>

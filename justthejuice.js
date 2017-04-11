@@ -11,9 +11,10 @@ var mongoose = require('mongoose');
 
 var credentials = require('./credentials.js');
 var Recipe = require('./models/recipes.js');
-var RecipeListener = require('./models/recipeListener.js');
+var User = require('./models/users.js');
 
 require('./lib/recipesData.js');
+require('./lib/userData.js');
 
 //my scripts
 
@@ -23,12 +24,14 @@ var handlesbars = require('express-handlebars')
     .create({defaultLayout: 'main',
         helpers: {
             section: function (name, options) {
-                if (!this._sections) this._sections = {};
+                if (!this._sections) {
+                    this._sections = {};
+                }
                 this._sections[name] = options.fn(this);
                 return null;
             }
         }
-        });
+});
 app.engine('handlebars', handlesbars.engine);
 app.set('view engine', 'handlebars');
 
@@ -123,9 +126,9 @@ app.post('/new-recipe', function(req, res){
         category: req.body.category,
         rating: 0,
         description: req.body.description,
-        ingredients: req.body.ingredients,
-        steps: req.body.steps,
-        notes: req.body.notes,
+        ingredients: req.body.ingreds_list,
+        steps: req.body.step_list,
+        notes: req.body.note_list,
         image: ' '},
         {$push: {recipe_id: req.body.recipe_id}},
         {upsert: true},

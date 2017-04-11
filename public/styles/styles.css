@@ -61,6 +61,9 @@ body {
     text-align: right;
     bottom: 25%;
 }
+.carousel-caption a, a:hover {
+    color: white;
+}
 #login_form {
     border-right: solid 2px #8ac158;
     padding: 3%;
